@@ -33,6 +33,8 @@ func init() {
 	beego.Router("/manager/attach/list", &controllers.ManagerController{}, "*:AttachList")
 	beego.Router("/manager/attach/detailed/:id", &controllers.ManagerController{}, "*:AttachDetailed")
 	beego.Router("/manager/attach/delete", &controllers.ManagerController{}, "post:AttachDelete")
+	beego.Router("/manager/label/list", &controllers.ManagerController{},"get:LabelList")
+	beego.Router("/manager/label/delete/:id", &controllers.ManagerController{},"post:LabelDelete")
 
 	beego.Router("/setting", &controllers.SettingController{}, "*:Index")
 	beego.Router("/setting/password", &controllers.SettingController{}, "*:Password")
@@ -49,6 +51,7 @@ func init() {
 	beego.Router("/book/users/create", &controllers.BookMemberController{}, "post:AddMember")
 	beego.Router("/book/users/change", &controllers.BookMemberController{}, "post:ChangeRole")
 	beego.Router("/book/users/delete", &controllers.BookMemberController{}, "post:RemoveMember")
+	beego.Router("/book/users/import", &controllers.BookController{},"post:Import")
 
 	beego.Router("/book/setting/save", &controllers.BookController{}, "post:SaveBook")
 	beego.Router("/book/setting/open", &controllers.BookController{}, "post:PrivatelyOwned")
@@ -64,6 +67,7 @@ func init() {
 	beego.Router("/api/:key/delete", &controllers.DocumentController{}, "post:Delete")
 	beego.Router("/api/:key/content/?:id", &controllers.DocumentController{}, "*:Content")
 	beego.Router("/api/:key/compare/:id", &controllers.DocumentController{}, "*:Compare")
+	beego.Router("/api/search/user/:key", &controllers.SearchController{}, "*:User")
 
 	beego.Router("/history/get", &controllers.DocumentController{}, "get:History")
 	beego.Router("/history/delete", &controllers.DocumentController{}, "*:DeleteHistory")
@@ -72,8 +76,7 @@ func init() {
 	beego.Router("/docs/:key", &controllers.DocumentController{}, "*:Index")
 	beego.Router("/docs/:key/:id", &controllers.DocumentController{}, "*:Read")
 	beego.Router("/docs/:key/search", &controllers.DocumentController{}, "post:Search")
-	beego.Router("/export/:key", &controllers.DocumentController{}, "*:ExportBook")
-	beego.Router("/export/:key/:id", &controllers.DocumentController{}, "*:ExportDoc")
+	beego.Router("/export/:key", &controllers.DocumentController{}, "*:Export")
 	beego.Router("/qrcode/:key.png", &controllers.DocumentController{}, "get:QrCode")
 
 	beego.Router("/attach_files/:key/:attach_id", &controllers.DocumentController{}, "get:DownloadAttachment")
